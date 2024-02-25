@@ -1,6 +1,12 @@
 .header {
     border-bottom: 1px solid #bbbbbbcb;
-    background-color: #6f27ff;
+    background: linear-gradient(to right,rgb(238, 255, 0), rgb(0, 8, 253), rgb(214, 12, 12));
+}
+
+.header img{
+    border-radius: 40%;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .header .header-navbar {
