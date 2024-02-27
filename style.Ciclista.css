@@ -3,7 +3,7 @@ body {
     /* background-repeat: no-repeat; */
     background-position: left top;
     background-size: cover;
-    background-image: url('Image/Caminata.jpg');
+    background-image: url('Image/Ciclista.jpg');
     color: #000;
     margin: 0; 
     padding: 0;
@@ -23,8 +23,8 @@ button {
     cursor: pointer;
     text-align: center;
     transition: 0.5s;
-    margin-top: 10%;
     font-size: 16px;
+    margin-top: 10%;
 }
 
 button:hover {
@@ -42,7 +42,3 @@ li {
 li:last-child {
     border-bottom: none;
 }
-
-
-
-
