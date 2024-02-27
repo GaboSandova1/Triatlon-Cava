@@ -3,7 +3,7 @@ body {
     /* background-repeat: no-repeat; */
     background-position: left top;
     background-size: cover;
-    background-image: url('Image/Caminata.jpg');
+    background-image: url('Image/Natacion1.jpg');
     color: #000;
     margin: 0; 
     padding: 0;
@@ -100,7 +100,3 @@ li {
 li:last-child {
     border-bottom: none;
 }
-
-
-
-
