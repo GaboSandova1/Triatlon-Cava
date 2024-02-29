@@ -1,5 +1,6 @@
 // Variables globales
 let participants = [];
+let currentParticipant = null;
 // let currentParticipant = null;
 
 document.addEventListener('DOMContentLoaded', () => {
