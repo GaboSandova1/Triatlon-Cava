@@ -1,86 +1,111 @@
-document.getElementById('registration-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+// script.js
 
-    const Ci = document.getElementById('Ci').value;
-    const nombre = document.getElementById('nombre').value;
-    const municipio = document.getElementById('municipio').value;
-    const edad = document.getElementById('edad').value;
-
-    const participantList = document.getElementById('participant-list');
-    const newParticipant = document.createElement('li');
-    newParticipant.innerHTML = `<strong>${nombre} - ${Ci} - ${municipio} - ${edad}</strong>`;
-    participantList.appendChild(newParticipant);
-
-    const data = { Ci, nombre, municipio, edad };
-    fetch('/api/participants', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-    })
-    .then(response => response.json())
-    .then(data => console.log('Participante registrado:', data))
-    .catch(error => console.error('Error al registrar participante:', error));
-
-    // Limpiar el formulario
-    document.getElementById('registration-form').reset();
-});
-
-function getParticipant(id) {
-    const participants = JSON.parse(localStorage.getItem('participants')) || [];
-    return participants.find(participant => participant.id === id);
-}
-
-function updateParticipantProgress(id, distance) {
-    const participants = JSON.parse(localStorage.getItem('participants')) || [];
-    const participant = participants.find(p => p.id === id);
-
-    if (!participant) {
-        console.error('Participante no encontrado:', id);
-        return;
+// Función para registrar a un nuevo participante
+(function registerModule() {
+    const registrationForm = document.getElementById('registration-form');
+    registrationForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+  
+        const cedula = document.getElementById('participant-cedula').value;
+        const name = document.getElementById('participant-name').value;
+        const municipio = document.getElementById('participant-municipio').value;
+        const edad = document.getElementById('participant-edad').value;
+    
+        if (!name || !cedula || !municipio || !edad) {
+          console.error('Todos los campos son obligatorios');
+          return;
+        }
+    
+        const newParticipant = {
+          id: new Date().getTime(),
+          name,
+          cedula,
+          municipio,
+          edad,
+          disciplines: {
+            walk: 0,
+            swim: 0,
+            bike: 0
+          }
+        };
+    
+        participants = getParticipants().concat(newParticipant);
+        saveParticipants();
+    
+        console.log(`Participante ${name} registrado con ID ${newParticipant.id}`);
+    
+        // Limpiar el formulario
+        registrationForm.reset();
+    });
+  
+    // Función para guardar participantes en localStorage
+    function saveParticipants() {
+      localStorage.setItem('participants', JSON.stringify(participants));
     }
-
-    const startTime = new Date(participant.startTime);
-    const currentTime = new Date();
-    const timeElapsed = (currentTime - startTime) / 1000; // Convertir a segundos
-
-    participant.distance += distance;
-    participant.timeElapsed = timeElapsed;
-
-    localStorage.setItem('participants', JSON.stringify(participants));
-}
-
-function calculateElapsedTime(startTime, endTime) {
-
-    const elapsedMilliseconds = new Date(endTime) - new Date(startTime);
-
-    const hours = Math.floor(elapsedMilliseconds / 3600000); // 1 hora = 3600000 milisegundos
-    const minutes = Math.floor((elapsedMilliseconds % 3600000) / 60000); // 1 minuto = 60000 milisegundos
-    const seconds = Math.floor((elapsedMilliseconds % 60000) / 1000); // 1 segundo = 1000 milisegundos
-
-    return { hours, minutes, seconds };
-}
-
-function logElapsedTime() {
-    const startTime = new Date('2024-02-29T00:00:00'); // Fecha y hora de inicio de la carrera
-    const currentTime = new Date('2024-02-30T00:00:00'); // Fecha y hora actual
-
-    const elapsedTime = calculateElapsedTime(startTime, currentTime);
-
-    document.write('Tiempo transcurrido:', elapsedTime);
-}
-
-function generateRandomDistance() {
-    return Math.floor(Math.random() * 7) + 1;
-}
-
-// Simular la caminata del participante
-const participantDistance = 0; // Distancia total recorrida por el participante
-
-for (let i = 0; i < 10; i++) {
-    const randomDistance = generateRandomDistance();
-    participantDistance += randomDistance;
-    document.write(`El participante ha recorrido ${randomDistance} metros en esta etapa.`);
-}
-
-document.write(`La distancia total recorrida por el participante es ${participantDistance} metros.`);
-
+  
+    // Función para obtener participantes desde localStorage
+    function getParticipants() {
+      return JSON.parse(localStorage.getItem('participants')) || [];
+    }
+  })();
+  
+  // Función para iniciar una disciplina
+  (function disciplineModule() {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Obtener participantes desde localStorage
+      let participants = getParticipants();
+  
+      document.querySelectorAll('.discipline-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const discipline = btn.dataset.discipline;
+          if (discipline === 'walk') {
+            startDiscipline(discipline);
+          } else if (discipline === 'swim') {
+            startDiscipline(discipline);
+          } else if (discipline === 'bike') {
+            startDiscipline(discipline);
+          }
+        });
+      });
+    });
+  
+    // Función para obtener un participante por id
+    function getParticipant(participants, id) {
+      return participants.find(participant => participant.id === id);
+    }
+  
+    // Función para iniciar una disciplina
+    function startDiscipline(discipline) {
+        if (!currentParticipant) {
+            currentParticipant = getParticipant(participants, 'id');
+          }
+        
+          if (!currentParticipant) {
+            console.error('No se encontró ningún participante');
+            return;
+          }
+        
+          // Simular la disciplina
+          let distance = 0;
+          for (let i = 0; i < 10; i++) {
+            distance += Math.floor(Math.random() * 7) + 1;
+          }
+        
+          currentParticipant.disciplines.walk += distance;
+        
+          // Guardar en localStorage
+          saveParticipants();
+        
+          console.log(`Participante ${currentParticipant.name} ha completado ${distance} metros en caminata`);
+        }
+        
+        function saveParticipants() {
+            localStorage.setItem('participants', JSON.stringify(participants));
+        }
+        
+        function getParticipants() {
+            return JSON.parse(localStorage.getItem('participants')) || [];
+        }
+        
+    }
+)();
