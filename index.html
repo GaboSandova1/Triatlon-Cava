@@ -30,19 +30,46 @@
     <div class="login">
         <div class="login-form">
             <h1>Registro de participantes</h1>
-            <form id="registration-form">
-                <input type="text" id="participant-cedula" placeholder="Número de Cedula" required>
-                <input type="text" id="participant-name" placeholder="Nombre" required>
-                <input type="text" id="participant-municipio" placeholder="Municipio" required>
-                <input type="number" id="participant-edad" placeholder="Edad" min="18" max="120" required>
-                <center>
-                    <button id="register">Registrar</button>
-                </center>
-            </form>
-            <div class="form">
-                <h2>Lista de participantes</h2>
-                <ul id="participant-list"></ul>
+            <div>
+                <form id="registration-form">
+                    <div class="imputNom">
+                        <input type="text" id="ci" placeholder="Número de Cedula" required>
+                    </div>
+                    <div class="imputNom">
+                        <input type="text" id="nombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="imputNom">
+                        <input type="text" id="municipio" placeholder="Municipio" required>
+                    </div>
+                    <div class="imputNom">
+                        <input type="number" id="edad" placeholder="Edad" min="1" max="100" required>
+                    </div>
+                    
+                    <center>
+                        <button onclick="redirectAsistencia()">Registrar</button>
+                    </center>
+                </form>
             </div>
+            
+            <div>
+                <table id="Tabla">
+                    <tr>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Cedula
+                        </th>
+                        <th>
+                            Municipio
+                        </th>
+                        <th>
+                            Edad
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
         </div>
     </div>
     
@@ -51,7 +78,7 @@
     
     
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
 

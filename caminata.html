@@ -8,27 +8,47 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="Image/BanderaDeVenenzuela2.png">
 </head>
-<body>
-  <div class="lading-container">
-    <header class="header">
-        <nav>
-          <ul class="header-navbar">
+<body onload="loadAsistenciaTable()">
+  <header>
+      <nav>
+          <a href="./index.html">Inicio</a>
+      </nav>
+  </header>
+  <main>
+      <h1>Seleccione Participantes</h1>
 
-              <a href="index.html">
-                  <img width="160px" height="160px" src="Image/LogoCarabobo.jpg" alt="logo la cava">
-              </a>
-              <li><a href="caminata.html"><img src="Image/Maraton.png" alt="Caminata">Caminata</a></li>
-              <li><a href="natacion.html"><img src="Image/Nadador.png" alt="Nadador">Natacion</a></li>
-              <li><a href="ciclismo.html"><img src="Image/Ciclismo.png" alt="Ciclista">Ciclismo</a></li>
-              <li></li>
-          </ul>
-        </nav>
-    </header>
-  </div>
-    <div>
-      <h1>Caminata</h1>
-      <center><button class="discipline-btn" data-discipline="walk">Comenzar la caminata</button></center>
-    </div>
-    <script src="app.js"></script>
+      <table id="tabla-asistencia">
+
+          <thead>
+              <tr>
+                  <th>
+                      Asistencia
+                  </th>
+                  <th>
+                      Nombre
+                  </th>
+                  <th>
+                      Cedula
+                  </th>
+                  <th>
+                      Municipio
+                  </th>
+                  <th>
+                      Edad
+                  </th>
+              </tr>
+          </thead>
+
+          <tbody id="body-tabla-asistencia">
+
+          </tbody>
+
+      </table>
+      <div id="check">
+          <label for="input-hora">Hora inicio:</label>
+          <input type="time" id="input-hora" name="input-hora" min="00:00:00" max="23:59:59" step="2" required>
+          <button id="enviar" onclick="initTriatlon()">Iniciar</button>
+      </div>
+    <script src="script.js"></script>
 </body>
 </html>
