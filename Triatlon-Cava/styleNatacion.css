@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    /* background-repeat: no-repeat; */
+    background-position: left top;
+    background-size: cover;
+    background-image: url('Image/Natacion1.jpg');
+    color: #000;
+    margin: 0; 
+    padding: 0;
+    
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    background-color: #5abd5e;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 5rem;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.5s;
+    margin-top: 10%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #51aa56;
+    transform: scale(1.1);
+    transform-origin: center;
+}
+
+li {
+    list-style: none;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+    border-bottom: none;
+}
