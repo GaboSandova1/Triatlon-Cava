@@ -3,6 +3,7 @@
     background: linear-gradient(to right,rgb(238, 255, 0), rgb(0, 8, 253), rgb(214, 12, 12));
     transform: translate(0%, -19%);
     width: 100vw;
+    margin: -3px 0;
 }
 
 .header img{
